@@ -1,0 +1,39 @@
+{
+  "name": "hbs-mailer",
+  "description": "Simple email sender with handlebars",
+  "version": "0.4.0",
+  "author": "Junmin Ahn <app.smartahn@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "simple",
+    "email",
+    "mailer"
+  ],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/smartahn/hbs-mailer.git"
+  },
+  "scripts": {
+    "test": "mocha --exit test.js"
+  },
+  "files": [
+    "LICENSE",
+    "HISTORY.md",
+    "index.js",
+    "test.js"
+  ],
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "dependencies": {
+    "handlebars": "^4.0.12",
+    "html-to-text": "^4.0.0",
+    "nodemailer": "^5.1.1"
+  },
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.4",
+    "mocha": "^5.2.0"
+  }
+}
