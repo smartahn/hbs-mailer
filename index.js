@@ -98,7 +98,7 @@ const getTemplate = function({ template, templatePath, subject, valueFn }) {
  *   if cache option is set to true, store handlebar instances for subject and html body.
  *   if not, create handlebar instances as sending emails.
  */
-const registerTemplate = function({ key, template, templatePath, subject, valueFn }) {
+const _registerTemplate = function({ key, template, templatePath, subject, valueFn }) {
   if (_options.cache) {
     return getTemplate({ template, templatePath, subject, valueFn })
       .then(({ subject, html }) => {
@@ -117,8 +117,8 @@ const registerTemplate = function({ key, template, templatePath, subject, valueF
  */
 const registerTemplates = function(templates) {
   return isArray(templates) ?
-    Promise.all(templates.map(registerTemplate)) :
-    registerTemplate(templates);
+    Promise.all(templates.map(_registerTemplate)) :
+    _registerTemplate(templates);
 };
 
 /**
@@ -152,7 +152,14 @@ const send = function({
  * Interpolate subject and html body with input data and send email.
  */
 const sendEmail = function({ key, data, receiver, sender, extraData }) {
-  const templateProm = _options.cache ? Promise.resolve(_cached[key]) : getTemplate(_templates[key]);
+  let templateProm;
+  if (_options.cache) {
+    if (!_cached[key]) return Promise.reject(`email template '${key}' has not been registered!`);
+    templateProm = Promise.resolve(_cached[key]);
+  } else {
+    if (!_templates[key]) return Promise.reject(`email template '${key}' has not been registered!`);
+    templateProm = getTemplate(_templates[key]);
+  }
 
   return templateProm.then(template => {
     if (!template) throw new Error(`template ${key} is not registered!`);
@@ -213,6 +220,7 @@ module.exports = exports = {
   createTransport,
   setLocals,
   setOptions,
+  registerTemplate: _registerTemplate,
   registerTemplates,
   sendEmail,
   bind,

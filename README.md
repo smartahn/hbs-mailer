@@ -44,6 +44,7 @@ await mailer.sendEmail({
 ## Table of contents
 
 - [createTransport](#createTransport)
+- [registerTemplate](#registerTemplate)
 - [registerTemplates](#registerTemplates)
 - [sendEmail](#sendEmail)
 - [bind](#bind)
@@ -93,10 +94,10 @@ app.use(mailer.bind({
 
 ---
 
-
+## registerTemplate
 ## registerTemplates
 
-You can register templates by key in various ways.
+You can register template(s) by key in various ways.
 - as template string
 - as template path
 - as async function returning a template string and a subject
@@ -104,7 +105,7 @@ You can register templates by key in various ways.
 This method takes single template or array of templates.
 
 ```js
-await mailer.registerTemplates({
+await mailer.registerTemplate({
   key: 'signup',
   template: '<p>Dear {{user.name}},<br>...',
   subject: 'Welcome',
@@ -124,7 +125,7 @@ await mailer.registerTemplates([{
 ### Register a template as a template string
 
 ```js
-await mailer.registerTemplates({
+await mailer.registerTemplate({
   key: 'signup',
   template: '<p>Dear {{user.name}},<br>...',
   subject: 'Welcome',
@@ -137,7 +138,7 @@ The template path is an absolute path and using 'path.resolve' is a suggested wa
 ```js
 const path = require('path');
 
-await mailer.registerTemplates({
+await mailer.registerTemplate({
   key: 'signup',
   templatePath: path.resolve('./signup.email.html'),
   subject: 'Welcome',
@@ -149,12 +150,12 @@ The value function is expected to return both template and subject to cover a ca
 In case of db is the source of the templates, disable 'cache' option to get the current ones when sending emails.
 
 ```js
-await mailer.registerTemplates({
+await mailer.registerTemplate({
   key: 'signup',
   valueFn: () => Promise.resolve({ template: '<p>Dear {{user.name}},<br>...', subject: 'Welcome' }),
 });
 
-await mailer.registerTemplates({
+await mailer.registerTemplate({
   key: 'signup',
   valueFn: () => {
     const Template = mongoose.model('Template');
@@ -214,7 +215,7 @@ const app = express();
 mailer.createTransport(...);
 app.use(mailer.bind();
 
-await mailer.registerTemplates({
+await mailer.registerTemplate({
   key: 'request-send-email',
   template: '<p>Your requested path is {{req.path}}</p>',
   subject: 'Request Path',
@@ -276,7 +277,7 @@ or just disable 'cache' option.
 
 ```js
 mailer.setOptions({ cache: true });
-await mailer.registerTemplates(...);
+await mailer.registerTemplate(...);
 ```
 
 [back to top](#table-of-contents)

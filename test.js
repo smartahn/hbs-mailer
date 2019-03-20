@@ -182,7 +182,7 @@ describe('Register Template with Cache', function() {
     mailer.setOptions({ cache: true });
 
     const _template = '<p>Hello {{World}} Again!</p>';
-    mailer.registerTemplates({
+    mailer.registerTemplate({
       key: 'test4',
       template: _template,
       subject: 'Hello World Again',
@@ -213,7 +213,7 @@ describe('Register Template with Value Function', function() {
   it(`should cache a template`, function(done) {
 
     const _template = '<p>Hello {{World}} Again!</p>';
-    mailer.registerTemplates({
+    mailer.registerTemplate({
       key: 'test5',
       valueFn: () => Promise.resolve({ template: '<p>I am a {{animal}}</p>', subject: 'Who are you?' }),
     }).then(({ html }) => {
@@ -243,7 +243,7 @@ describe('Register Template with Value Template Path', function() {
   it(`should cache a template`, function(done) {
 
     const _template = '<p>Hello {{World}} Again!</p>';
-    mailer.registerTemplates({
+    mailer.registerTemplate({
       key: 'test6',
       templatePath: path.resolve('./test.html'),
       subject: 'Hello There'
