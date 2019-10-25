@@ -8,7 +8,7 @@
 
   * Export 'registerTemplate' method
 
-0.4.2 / 2019-10-25
+0.4.3 / 2019-10-25
 ==================
 
   * Deprecation Notice

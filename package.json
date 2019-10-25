@@ -1,7 +1,7 @@
 {
   "name": "hbs-mailer",
   "description": "Simple email sender with handlebars",
-  "version": "0.4.1",
+  "version": "0.4.3",
   "author": "Junmin Ahn <app.smartahn@gmail.com>",
   "license": "MIT",
   "keywords": [
