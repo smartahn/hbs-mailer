@@ -1,3 +1,5 @@
+## __this is no longer supported, please consider using [cache-mailer](https://github.com/smartahn/cache-mailer) instead__
+---
 # hbs-mailer
 
 Simple email sender with handlebars
